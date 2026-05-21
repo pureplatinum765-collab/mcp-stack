@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "description": "MCP tool definitions exposed per connector",
+  "tools": {
+    "github": [
+      {"name": "list_repos", "scope": "read", "description": "List repositories accessible to the token"},
+      {"name": "get_file", "scope": "read", "description": "Read file contents from a repository"},
+      {"name": "list_issues", "scope": "read", "description": "List issues in a repository"},
+      {"name": "list_pull_requests", "scope": "read", "description": "List open pull requests"},
+      {"name": "create_issue", "scope": "write", "enabled_after_validation": true, "description": "Create a new issue"},
+      {"name": "push_file", "scope": "write", "enabled_after_validation": true, "description": "Commit a file to a branch"}
+    ],
+    "notion": [
+      {"name": "search_pages", "scope": "read", "description": "Search Notion workspace pages"},
+      {"name": "get_page", "scope": "read", "description": "Retrieve a page by ID"},
+      {"name": "list_databases", "scope": "read", "description": "List accessible databases"},
+      {"name": "create_page", "scope": "write", "enabled_after_validation": true, "description": "Create a new page in a database"}
+    ],
+    "stackone": [
+      {"name": "list_accounts", "scope": "read", "description": "List connected StackOne accounts"},
+      {"name": "get_employees", "scope": "read", "description": "Fetch employee records"}
+    ],
+    "cloudflare": [
+      {"name": "list_zones", "scope": "read", "description": "List Cloudflare zones"},
+      {"name": "get_dns_records", "scope": "read", "description": "Get DNS records for a zone"},
+      {"name": "list_workers", "scope": "read", "description": "List deployed Workers scripts"}
+    ],
+    "firecrawl": [
+      {"name": "scrape_url", "scope": "read", "description": "Scrape a single URL and return markdown"},
+      {"name": "crawl_site", "scope": "read", "description": "Crawl a site and return structured content"},
+      {"name": "extract_data", "scope": "read", "description": "Extract structured data from a page"}
+    ],
+    "make": [
+      {"name": "list_scenarios", "scope": "read", "description": "List Make automation scenarios"},
+      {"name": "run_scenario", "scope": "write", "enabled_after_validation": true, "description": "Trigger a Make scenario"}
+    ],
+    "google_drive": [
+      {"name": "list_files", "scope": "read", "description": "List files in Google Drive"},
+      {"name": "get_file_content", "scope": "read", "description": "Read file content by ID"},
+      {"name": "search_files", "scope": "read", "description": "Search files by name or content"}
+    ],
+    "onedrive": [
+      {"name": "list_files", "scope": "read", "description": "List files in OneDrive"},
+      {"name": "get_file_content", "scope": "read", "description": "Read file content by ID"}
+    ],
+    "discord": [
+      {"name": "list_guilds", "scope": "read", "description": "List Discord servers the bot is in"},
+      {"name": "list_channels", "scope": "read", "description": "List channels in a guild"},
+      {"name": "send_message", "scope": "write", "enabled_after_validation": true, "description": "Send a message to a channel"}
+    ],
+    "supabase": [
+      {"name": "list_tables", "scope": "read", "description": "List tables in the Supabase project"},
+      {"name": "query_table", "scope": "read", "description": "Run a SELECT query on a table"},
+      {"name": "insert_row", "scope": "write", "enabled_after_validation": true, "description": "Insert a row into a table"}
+    ],
+    "sentry": [
+      {"name": "list_projects", "scope": "read", "description": "List Sentry projects"},
+      {"name": "list_issues", "scope": "read", "description": "List Sentry error issues"},
+      {"name": "get_issue", "scope": "read", "description": "Get details of a specific Sentry issue"}
+    ]
+  }
+}

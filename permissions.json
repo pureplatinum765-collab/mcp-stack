@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "policy": "minimal-read-first",
+  "description": "Default minimal-permission policy. Write scopes are disabled until validate.sh passes for each connector.",
+  "phases": {
+    "bootstrap": {
+      "description": "Read-only access for all connectors during initial health check",
+      "write_enabled": false,
+      "connectors": {
+        "github": ["repo:read", "read:user"],
+        "notion": ["read_content"],
+        "stackone": ["accounts:read"],
+        "cloudflare": ["zone:read"],
+        "firecrawl": ["scrape:read"],
+        "make": ["scenarios:read"],
+        "google_drive": ["drive.readonly"],
+        "onedrive": ["Files.Read", "User.Read"],
+        "discord": ["guilds:read", "channels:read"],
+        "supabase": ["db:read"],
+        "sentry": ["org:read", "project:read"]
+      }
+    },
+    "validated": {
+      "description": "Write scopes enabled after validate.sh passes for each connector",
+      "write_enabled": true,
+      "connectors": {
+        "github": ["repo:read", "repo:write", "read:user"],
+        "notion": ["read_content", "write_content"],
+        "stackone": ["accounts:read", "employees:write"],
+        "cloudflare": ["zone:read", "dns:write", "workers:write"],
+        "firecrawl": ["scrape:read", "crawl:write"],
+        "make": ["scenarios:read", "scenarios:run"],
+        "google_drive": ["drive.readonly", "drive.file"],
+        "onedrive": ["Files.Read", "Files.ReadWrite", "User.Read"],
+        "discord": ["guilds:read", "channels:read", "messages:write"],
+        "supabase": ["db:read", "db:write"],
+        "sentry": ["org:read", "project:read", "issues:write"]
+      }
+    }
+  }
+}

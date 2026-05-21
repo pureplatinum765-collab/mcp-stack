@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "description": "MCP connector definitions for Perplexity Enterprise Pro",
+  "connectors": [
+    {
+      "id": "github",
+      "name": "GitHub",
+      "auth_type": "oauth",
+      "mcp_server": "https://api.githubcopilot.com/mcp",
+      "health_endpoint": "https://api.github.com/user",
+      "oauth_scopes": ["repo:read", "read:user"],
+      "env_key": "GITHUB_TOKEN",
+      "notes": "OAuth preferred; PAT accepted. Minimal scope: repo:read for validation."
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "auth_type": "oauth",
+      "mcp_server": "https://api.notion.com/v1/mcp",
+      "health_endpoint": "https://api.notion.com/v1/users/me",
+      "oauth_scopes": ["read_content"],
+      "env_key": "NOTION_TOKEN",
+      "notes": "OAuth integration token. Create at https://www.notion.so/my-integrations."
+    },
+    {
+      "id": "stackone",
+      "name": "StackOne",
+      "auth_type": "api_key",
+      "mcp_server": "https://api.stackone.com/mcp",
+      "health_endpoint": "https://api.stackone.com/v1/accounts",
+      "env_key": "STACKONE_API_KEY",
+      "notes": "API key from StackOne dashboard under Settings > API Keys."
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "auth_type": "api_key",
+      "mcp_server": "https://api.cloudflare.com/mcp",
+      "health_endpoint": "https://api.cloudflare.com/client/v4/user",
+      "env_key": "CLOUDFLARE_API_TOKEN",
+      "notes": "Scoped API token from Cloudflare dashboard. Minimal: Zone.Read."
+    },
+    {
+      "id": "firecrawl",
+      "name": "Firecrawl",
+      "auth_type": "api_key",
+      "mcp_server": "https://api.firecrawl.dev/mcp",
+      "health_endpoint": "https://api.firecrawl.dev/v1/crawl",
+      "env_key": "FIRECRAWL_API_KEY",
+      "notes": "API key from app.firecrawl.dev. Free tier includes 500 credits."
+    },
+    {
+      "id": "make",
+      "name": "Make (Integromat)",
+      "auth_type": "api_key",
+      "mcp_server": "https://api.make.com/mcp",
+      "health_endpoint": "https://api.make.com/api/v2/users/me",
+      "env_key": "MAKE_API_KEY",
+      "notes": "API key from Make dashboard under Profile > API Access."
+    },
+    {
+      "id": "google_drive",
+      "name": "Google Drive",
+      "auth_type": "oauth",
+      "mcp_server": "https://www.googleapis.com/mcp",
+      "health_endpoint": "https://www.googleapis.com/drive/v3/about?fields=user",
+      "oauth_scopes": ["https://www.googleapis.com/auth/drive.readonly"],
+      "env_key": "GOOGLE_DRIVE_TOKEN",
+      "notes": "OAuth2. Create credentials at console.cloud.google.com. Redirect: http://localhost:8080."
+    },
+    {
+      "id": "onedrive",
+      "name": "Microsoft OneDrive",
+      "auth_type": "oauth",
+      "mcp_server": "https://graph.microsoft.com/v1.0/mcp",
+      "health_endpoint": "https://graph.microsoft.com/v1.0/me",
+      "oauth_scopes": ["Files.Read", "User.Read"],
+      "env_key": "ONEDRIVE_TOKEN",
+      "notes": "OAuth via Azure App Registration. Minimal scope: Files.Read."
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "auth_type": "bot_token",
+      "mcp_server": "https://discord.com/api/mcp",
+      "health_endpoint": "https://discord.com/api/v10/users/@me",
+      "env_key": "DISCORD_BOT_TOKEN",
+      "notes": "Bot token from Discord Developer Portal. Minimal intent: GUILD_MESSAGES read."
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "auth_type": "api_key",
+      "mcp_server": "https://api.supabase.com/mcp",
+      "health_endpoint": "https://api.supabase.com/v1/projects",
+      "env_key": "SUPABASE_SERVICE_KEY",
+      "notes": "Service role key from Supabase project Settings > API. Use anon key for read-only."
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry",
+      "auth_type": "api_key",
+      "mcp_server": "https://sentry.io/api/mcp",
+      "health_endpoint": "https://sentry.io/api/0/organizations/",
+      "env_key": "SENTRY_AUTH_TOKEN",
+      "notes": "Auth token from Sentry Settings > Developer Settings > Auth Tokens. Minimal: org:read."
+    }
+  ]
+}
