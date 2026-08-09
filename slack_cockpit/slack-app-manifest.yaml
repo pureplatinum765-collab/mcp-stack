@@ -1,0 +1,21 @@
+display_information:
+  name: NotebookLM AI Cockpit
+  description: Safe Slack front door for grounded NotebookLM queries
+  background_color: "#1f1f1f"
+features:
+  bot_user:
+    display_name: NotebookLM Cockpit
+    always_online: false
+  slash_commands:
+    - command: /nlm
+      description: Query the local NotebookLM cockpit
+      usage_hint: "help | notebooks | doctor | query <id> | <question> | cross <ids> | <question>"
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - commands
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false
