@@ -15,9 +15,12 @@ import subprocess
 from dataclasses import dataclass
 from typing import Sequence
 
+from dotenv import load_dotenv
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
+
+load_dotenv()
 
 BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 APP_TOKEN = os.environ["SLACK_APP_TOKEN"]
