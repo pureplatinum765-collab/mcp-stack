@@ -1,0 +1,24 @@
+name: Slack cockpit check
+
+on:
+  pull_request:
+    paths:
+      - 'slack_cockpit/**'
+      - 'notebooklm/**'
+      - '.github/workflows/slack-cockpit-check.yml'
+  push:
+    paths:
+      - 'slack_cockpit/**'
+      - 'notebooklm/**'
+      - '.github/workflows/slack-cockpit-check.yml'
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile Slack cockpit
+        run: python -m py_compile slack_cockpit/app.py
