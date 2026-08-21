@@ -4,7 +4,30 @@
 # Example: bash validate.sh github
 set -euo pipefail
 
-[ -f .env ] && source .env || { echo "[error] .env not found. Run bootstrap.sh first."; exit 1; }
+load_env() {
+  local env_file="$1" line key value
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    line="${line#"${line%%[![:space:]]*}"}"
+    [[ -z "$line" || "$line" == \#* ]] && continue
+    [[ "$line" == export\ * ]] && line="${line#export }"
+    if [[ "$line" =~ ^([A-Za-z_][A-Za-z0-9_]*)=(.*)$ ]]; then
+      key="${BASH_REMATCH[1]}"
+      value="${BASH_REMATCH[2]}"
+      if [[ "$value" =~ ^\"(.*)\"$ || "$value" =~ ^\'(.*)\'$ ]]; then
+        value="${value:1:-1}"
+      fi
+      export "$key=$value"
+    else
+      echo "[error] Invalid .env entry: $line" >&2
+      return 1
+    fi
+  done < "$env_file"
+}
+
+if [[ ! -f .env ]] || ! load_env .env; then
+  echo "[error] .env not found or invalid. Run bootstrap.sh first." >&2
+  exit 1
+fi
 
 GREEN='\033[0;32m'; RED='\033[0;31m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
 ok()   { echo -e "${GREEN}[PASS]${NC} $1"; }
@@ -30,39 +53,53 @@ run_check() {
   [[ "$FILTER" != "all" && "$FILTER" != "$id" ]] && return
   case $id in
     github)
-      [[ -n "${GITHUB_TOKEN:-}" && "${GITHUB_TOKEN}" != *"your_"* ]] \
-        && check_url "GitHub" "https://api.github.com/user" "$GITHUB_TOKEN" "Authorization: token" \
-        || warn "GitHub — token not set"
+      if [[ -n "${GITHUB_TOKEN:-}" && "${GITHUB_TOKEN}" != *"your_"* ]]; then
+        check_url "GitHub" "https://api.github.com/user" "$GITHUB_TOKEN" "Authorization: token"
+      else
+        warn "GitHub — token not set"
+      fi
       ;;
     notion)
-      [[ -n "${NOTION_TOKEN:-}" && "${NOTION_TOKEN}" != *"your_"* ]] \
-        && check_url "Notion" "https://api.notion.com/v1/users/me" "$NOTION_TOKEN" "Authorization: Bearer" \
-        || warn "Notion — token not set"
+      if [[ -n "${NOTION_TOKEN:-}" && "${NOTION_TOKEN}" != *"your_"* ]]; then
+        check_url "Notion" "https://api.notion.com/v1/users/me" "$NOTION_TOKEN" "Authorization: Bearer"
+      else
+        warn "Notion — token not set"
+      fi
       ;;
     cloudflare)
-      [[ -n "${CLOUDFLARE_API_TOKEN:-}" && "${CLOUDFLARE_API_TOKEN}" != *"your_"* ]] \
-        && check_url "Cloudflare" "https://api.cloudflare.com/client/v4/user" "$CLOUDFLARE_API_TOKEN" "Authorization: Bearer" \
-        || warn "Cloudflare — token not set"
+      if [[ -n "${CLOUDFLARE_API_TOKEN:-}" && "${CLOUDFLARE_API_TOKEN}" != *"your_"* ]]; then
+        check_url "Cloudflare" "https://api.cloudflare.com/client/v4/user" "$CLOUDFLARE_API_TOKEN" "Authorization: Bearer"
+      else
+        warn "Cloudflare — token not set"
+      fi
       ;;
     firecrawl)
-      [[ -n "${FIRECRAWL_API_KEY:-}" && "${FIRECRAWL_API_KEY}" != *"your_"* ]] \
-        && check_url "Firecrawl" "https://api.firecrawl.dev/v1/scrape" "$FIRECRAWL_API_KEY" "Authorization: Bearer" \
-        || warn "Firecrawl — token not set"
+      if [[ -n "${FIRECRAWL_API_KEY:-}" && "${FIRECRAWL_API_KEY}" != *"your_"* ]]; then
+        check_url "Firecrawl" "https://api.firecrawl.dev/v1/scrape" "$FIRECRAWL_API_KEY" "Authorization: Bearer"
+      else
+        warn "Firecrawl — token not set"
+      fi
       ;;
     supabase)
-      [[ -n "${SUPABASE_SERVICE_KEY:-}" && "${SUPABASE_SERVICE_KEY}" != *"your_"* && -n "${SUPABASE_URL:-}" ]] \
-        && check_url "Supabase" "${SUPABASE_URL}/rest/v1/" "$SUPABASE_SERVICE_KEY" "apikey" \
-        || warn "Supabase — token or URL not set"
+      if [[ -n "${SUPABASE_SERVICE_KEY:-}" && "${SUPABASE_SERVICE_KEY}" != *"your_"* && -n "${SUPABASE_URL:-}" ]]; then
+        check_url "Supabase" "${SUPABASE_URL}/rest/v1/" "$SUPABASE_SERVICE_KEY" "apikey"
+      else
+        warn "Supabase — token or URL not set"
+      fi
       ;;
     sentry)
-      [[ -n "${SENTRY_AUTH_TOKEN:-}" && "${SENTRY_AUTH_TOKEN}" != *"your_"* ]] \
-        && check_url "Sentry" "https://sentry.io/api/0/organizations/" "$SENTRY_AUTH_TOKEN" "Authorization: Bearer" \
-        || warn "Sentry — token not set"
+      if [[ -n "${SENTRY_AUTH_TOKEN:-}" && "${SENTRY_AUTH_TOKEN}" != *"your_"* ]]; then
+        check_url "Sentry" "https://sentry.io/api/0/organizations/" "$SENTRY_AUTH_TOKEN" "Authorization: Bearer"
+      else
+        warn "Sentry — token not set"
+      fi
       ;;
     discord)
-      [[ -n "${DISCORD_BOT_TOKEN:-}" && "${DISCORD_BOT_TOKEN}" != *"your_"* ]] \
-        && check_url "Discord" "https://discord.com/api/v10/users/@me" "$DISCORD_BOT_TOKEN" "Authorization: Bot" \
-        || warn "Discord — token not set"
+      if [[ -n "${DISCORD_BOT_TOKEN:-}" && "${DISCORD_BOT_TOKEN}" != *"your_"* ]]; then
+        check_url "Discord" "https://discord.com/api/v10/users/@me" "$DISCORD_BOT_TOKEN" "Authorization: Bot"
+      else
+        warn "Discord — token not set"
+      fi
       ;;
     make)
       warn "Make — health check requires team ID; validate manually at https://www.make.com/api/v2/users/me"

@@ -37,7 +37,7 @@ jobs:
           chmod +x gitleaks
 
       - name: Run Gitleaks
-        run: ./gitleaks detect --source . --no-git --redact --exit-code 1 || true
+        run: ./gitleaks detect --source . --no-git --redact --exit-code 1
 
   shell-lint:
     name: Shell Script Lint
