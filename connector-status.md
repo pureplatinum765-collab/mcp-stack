@@ -16,6 +16,7 @@ Update this file after each successful `bash validate.sh` run.
 | Discord | `https://discord.com/api/v10/mcp` | Bot Token | ⬜ Untested | | |
 | Supabase | `https://mcp.supabase.com/sse` | Service Key | ⬜ Untested | | Also requires SUPABASE_URL in .env |
 | Sentry | `https://mcp.sentry.io/sse` | Auth Token | ⬜ Untested | | |
+| Superhuman Mail | `https://mcp.mail.superhuman.com/mcp` | OAuth | 🔒 OAuth Pending | | Browser OAuth flow on first connect |
 
 ## Status Key
 

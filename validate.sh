@@ -104,6 +104,9 @@ run_check() {
     make)
       warn "Make — health check requires team ID; validate manually at https://www.make.com/api/v2/users/me"
       ;;
+    superhuman_mail)
+      warn "Superhuman Mail — OAuth is handled by the MCP client via browser flow; add https://mcp.mail.superhuman.com/mcp to your client and complete sign-in"
+      ;;
     google_drive|onedrive|stackone)
       warn "${id} — OAuth token validation requires browser flow; see README.md"
       ;;
@@ -112,7 +115,7 @@ run_check() {
 
 log "Running connector health checks (filter: ${FILTER})..."
 echo ""
-for id in github notion cloudflare firecrawl supabase sentry discord make google_drive onedrive stackone; do
+for id in github notion cloudflare firecrawl supabase sentry discord make google_drive onedrive stackone superhuman_mail; do
   run_check "$id"
 done
 echo ""

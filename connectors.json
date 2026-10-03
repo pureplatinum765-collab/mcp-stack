@@ -115,6 +115,7 @@
       "env_key": "SENTRY_AUTH_TOKEN",
       "docs": "https://docs.sentry.io/product/integrations/mcp",
       "notes": "Auth token from Sentry Settings > Developer Settings > Auth Tokens. Minimal: org:read."
-    }
+    },
+    {      "id": "superhuman_mail",      "name": "Superhuman Mail",      "auth_type": "oauth",      "mcp_server": "https://mcp.mail.superhuman.com/mcp",      "health_endpoint": "https://mcp.mail.superhuman.com/mcp",      "oauth_scopes": ["mail:read", "calendar:read"],      "env_key": "SUPERHUMAN_MAIL_TOKEN",      "docs": "https://help.superhuman.com/hc/en-us/articles/49810745762067-Superhuman-Mail-MCP-Server",      "notes": "Official remote MCP server (Streamable HTTP). OAuth via browser on first connect; client stores and reuses credentials. Requires Superhuman Mail Business/Enterprise with Ask AI enabled. One-click setup also available via Claude Connector Directory and ChatGPT App Store."    }
   ]
 }

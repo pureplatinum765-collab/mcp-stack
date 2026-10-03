@@ -3,6 +3,14 @@
 All notable changes to mcp-stack are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.2.0] - 2026-06-14
+
+### Added
+- Superhuman Mail connector (12th) — official remote MCP server at `https://mcp.mail.superhuman.com/mcp` (Streamable HTTP, OAuth browser flow)
+- Tool scopes in `tools.json`: search/read threads, calendar, draft reply, send email, create event (write after validation)
+- Permission phases in `permissions.json`: mail/calendar read at bootstrap; write after validation
+- `SUPERHUMAN_MAIL_TOKEN` placeholder in `.env.example`; checks in `validate.sh` and `bootstrap.sh`
+
 ## [1.1.0] - 2026-05-27
 
 ### Fixed
