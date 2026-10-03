@@ -17,7 +17,7 @@
         "onedrive": ["Files.Read", "User.Read"],
         "discord": ["guilds:read", "channels:read"],
         "supabase": ["db:read"],
-        "sentry": ["org:read", "project:read"]
+        "sentry": ["org:read", "project:read"], "superhuman_mail": ["mail:read", "calendar:read"]
       }
     },
     "validated": {
@@ -34,7 +34,7 @@
         "onedrive": ["Files.Read", "Files.ReadWrite", "User.Read"],
         "discord": ["guilds:read", "channels:read", "messages:write"],
         "supabase": ["db:read", "db:write"],
-        "sentry": ["org:read", "project:read", "issues:write"]
+        "sentry": ["org:read", "project:read", "issues:write"], "superhuman_mail": ["mail:read", "mail:write", "calendar:read", "calendar:write"]
       }
     }
   }

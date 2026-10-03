@@ -57,6 +57,7 @@
       {"name": "list_projects", "scope": "read", "description": "List Sentry projects"},
       {"name": "list_issues", "scope": "read", "description": "List Sentry error issues"},
       {"name": "get_issue", "scope": "read", "description": "Get details of a specific Sentry issue"}
-    ]
+    ],
+    "superhuman_mail": [      {"name": "search_threads", "scope": "read", "description": "Search email threads in the Superhuman inbox"},      {"name": "get_thread", "scope": "read", "description": "Read a specific email thread with messages"},      {"name": "list_calendar_events", "scope": "read", "description": "List upcoming calendar events"},      {"name": "draft_reply", "scope": "write", "enabled_after_validation": true, "description": "Draft a reply in the user's voice"},      {"name": "send_email", "scope": "write", "enabled_after_validation": true, "description": "Send an email via Superhuman"},      {"name": "create_event", "scope": "write", "enabled_after_validation": true, "description": "Create a calendar event"}    ]
   }
 }
