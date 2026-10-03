@@ -1,6 +1,6 @@
 # mcp-stack
 
-Automated MCP connector bootstrap for **Perplexity Enterprise Pro** + 11 connectors.
+Automated MCP connector bootstrap for **Perplexity Enterprise Pro** + 12 connectors.
 
 > Generated and pushed by Perplexity AI (May 2026)
 
@@ -19,6 +19,7 @@ Automated MCP connector bootstrap for **Perplexity Enterprise Pro** + 11 connect
 | 9 | Discord | Bot Token |
 | 10 | Supabase | Service Key |
 | 11 | Sentry | Auth Token |
+| 12 | Superhuman Mail | OAuth (browser flow) |
 
 ## Quick Start
 
@@ -50,7 +51,7 @@ bash validate.sh github
 | `.env.example` | Token placeholder template — copy to `.env` and fill in |
 | `bootstrap.sh` | Idempotent setup script |
 | `validate.sh` | Read-only health checks per connector |
-| `smoke-test-prompt.md` | Paste into Perplexity to exercise all 11 connectors |
+| `smoke-test-prompt.md` | Paste into Perplexity to exercise all 12 connectors |
 | `agent-handoff-map.md` | Which AI agent handles which tasks and where each one's limits are |
 
 ## Security Notes
